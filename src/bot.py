@@ -36,7 +36,7 @@ def run_discord_bot():
         username = str(interaction.user)
         discordClient.current_channel = interaction.channel
         logger.info(
-            f"\x1b[31m{username}\x1b[0m : /chat [{message}] in ({discordClient.current_channel})")
+            f"\x1b[31m{username}\x1b[0m : /ask [{message}] in ({discordClient.current_channel})")
 
         await discordClient.enqueue_message(interaction, message)
 
@@ -128,7 +128,7 @@ def run_discord_bot():
     async def help(interaction: discord.Interaction):
         await interaction.response.defer(ephemeral=False)
         await interaction.followup.send(""":star: **BASIC COMMANDS** \n
-        - `/chat [message]` Chat with ChatGPT(gpt-4)
+        - `/ask [message]` Chat with ChatGPT(gpt-4)
         - `/draw [prompt][model]` Generate an image with model you specific
         - `/switchpersona [persona]` Switch between optional ChatGPT jailbreaks
                 `dan`: DAN 13.5 (Latest Working ChatGPT Jailbreak prompt)
