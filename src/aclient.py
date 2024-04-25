@@ -17,6 +17,7 @@ from revChatGPT.V1 import AsyncChatbot
 from Bard import Chatbot as BardChatbot
 from EdgeGPT.EdgeGPT import Chatbot as EdgeChatbot
 
+
 load_dotenv()
 
 class aclient(discord.Client):
@@ -26,7 +27,7 @@ class aclient(discord.Client):
         super().__init__(intents=intents)
         self.tree = app_commands.CommandTree(self)
         self.current_channel = None
-        self.activity = discord.Activity(type=discord.ActivityType.listening, name="/chat | /help")
+        self.activity = discord.Activity(type=discord.ActivityType.listening, name="/ask | /help")
         self.isPrivate = False
         self.is_replying_all = os.getenv("REPLYING_ALL")
         self.replying_all_discord_channel_id = os.getenv("REPLYING_ALL_DISCORD_CHANNEL_ID")
@@ -88,7 +89,17 @@ class aclient(discord.Client):
                 while not self.message_queue.empty():
                     async with self.current_channel.typing():
                         message, user_message = await self.message_queue.get()
+                        print(f"### process_messages: {self.is_replying_all}")
+                        print(f"### user_message: {user_message}")
                         try:
+                            A = self.is_replying_all
+                            B = not user_message.strip().startswith("<@1145360476876845188>")
+                            X = A and B
+                            print(f"## X A:{A} B:{B} X:{X}")
+                            if X:
+                                print("### Ignore message")
+                            #    continue
+                            print("### Accept message") 
                             await self.send_message(message, user_message)
                         except Exception as e:
                             logger.exception(f"Error while processing message: {e}")

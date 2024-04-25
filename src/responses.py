@@ -5,7 +5,13 @@ from EdgeGPT.EdgeGPT import ConversationStyle
 
 
 async def official_handle_response(message, client) -> str:
-    return await sync_to_async(client.chatbot.ask)(message)
+    return await sync_to_async(client.chatbot.ask)(
+	message,
+        temperature=1.0,
+        top_p=0.1,
+        frequency_penalty=0.5,
+        presence_penalty=0.7,
+    )
 
 async def unofficial_handle_response(message, client) -> str:
     async for response in client.chatbot.ask(message):

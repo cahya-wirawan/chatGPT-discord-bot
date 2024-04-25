@@ -19,7 +19,7 @@ def run_discord_bot():
         logger.info(f'{client.user} is now running!')
 
 
-    @client.tree.command(name="chat", description="Have a chat with ChatGPT")
+    @client.tree.command(name="ask", description="Have a chat with NusaLM Chatbot")
     async def chat(interaction: discord.Interaction, *, message: str):
         if client.is_replying_all == "True":
             await interaction.response.defer(ephemeral=False)
@@ -32,7 +32,7 @@ def run_discord_bot():
         username = str(interaction.user)
         client.current_channel = interaction.channel
         logger.info(
-            f"\x1b[31m{username}\x1b[0m : /chat [{message}] in ({client.current_channel})")
+            f"\x1b[31m{username}\x1b[0m : /ask [{message}] in ({client.current_channel})")
 
         await client.enqueue_message(interaction, message)
 
@@ -151,8 +151,7 @@ def run_discord_bot():
     async def help(interaction: discord.Interaction):
         await interaction.response.defer(ephemeral=False)
         await interaction.followup.send(""":star: **BASIC COMMANDS** \n
-        - `/chat [message]` Chat with ChatGPT!
-        - `/draw [prompt]` Generate an image with the Dalle2 model
+        - `/ask [message]` Chat with ChatGPT!
         - `/switchpersona [persona]` Switch between optional ChatGPT jailbreaks
                 `random`: Picks a random persona
                 `chatgpt`: Standard ChatGPT mode
