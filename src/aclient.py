@@ -105,11 +105,14 @@ class discordClient(discord.Client):
             async_create = sync_to_async(self.chatBot.chat.completions.create, 
                                          thread_sensitive=True)
             response: ChatCompletion = await async_create(model=self.chatModel, 
-                                                          messages=self.conversation_history)
+                                                          messages=self.conversation_history, temperature=1.0, top_p=0.3, max_tokens=2000)
         else:
             response = await self.openai_client.chat.completions.create(
                 model=self.chatModel,
-                messages=self.conversation_history
+                messages=self.conversation_history,
+                temperature=1.0,
+                top_p=0.3,
+                max_tokens=2000
             )
 
         bot_response = response.choices[0].message.content
