@@ -34,7 +34,7 @@ class discordClient(discord.Client):
         self.chatModel = os.getenv("MODEL")
         self.conversation_history = []
         self.current_channel = None
-        self.activity = discord.Activity(type=discord.ActivityType.listening, name="/chat | /help")
+        self.activity = discord.Activity(type=discord.ActivityType.listening, name="/ask | /help")
         self.isPrivate = False
         self.is_replying_all = os.getenv("REPLYING_ALL")
         self.replying_all_discord_channel_id = os.getenv("REPLYING_ALL_DISCORD_CHANNEL_ID")
