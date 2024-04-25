@@ -23,7 +23,7 @@ def run_discord_bot():
         logger.info(f'{discordClient.user} is now running!')
 
 
-    @discordClient.tree.command(name="chat", description="Have a chat with ChatGPT")
+    @discordClient.tree.command(name="ask", description="Have a chat with ChatGPT")
     async def chat(interaction: discord.Interaction, *, message: str):
         if discordClient.is_replying_all == "True":
             await interaction.response.defer(ephemeral=False)
